@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=s, initial-scale=1.0" />
+    <title>Drums.js</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: "border-box";
+    }
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      background-image: url("./bg.jpg");
+    }
+    .title {
+      color: rgb(255, 127, 80);
+      font-family: "Courier New", Courier, monospace;
+    }
+    .btn-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .trigger {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.25rem;
+      width: 7rem;
+      height: 7rem;
+      line-height: 1.75rem;
+      background-color: rgba(0, 0, 0, 0.35);
+      color: #fff;
+      font-weight: 600;
+    }
+    .trigger span {
+      color: rgb(255, 127, 80);
+    }
+
+    .active {
+      transition: all 0.2s ease;
+      transform: scale(1.025);
+      border: 2px solid rgb(255, 127, 80);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1 class="title">Drums.js</h1>
+      <div class="btn-container">
+        <button class="trigger" id="65">
+          A <br />
+          <span>CLAP</span>
+        </button>
+        <button class="trigger" id="83">
+          S <br />
+          <span>HIHAT</span></button
+        ><button class="trigger" id="68">
+          D <br />
+          <span>KICK</span></button
+        ><button class="trigger" id="70">
+          F <br />
+          <span>OPENHAT</span></button
+        ><button class="trigger" id="71">
+          G <br />
+          <span>BOOM</span></button
+        ><button class="trigger" id="72">
+          H <br />
+          <span>RIDE</span></button
+        ><button class="trigger" id="74">
+          J <br />
+          <span>SNARE</span></button
+        ><button class="trigger" id="75">
+          K <br />
+          <span>TOM</span></button
+        ><button class="trigger" id="76">
+          L <br />
+          <span>COWBELL</span>
+        </button>
+      </div>
+    </div>
+    <script>
+      const addClass = (code) => {
+        setTimeout(() => {
+          document.getElementById(code).classList.remove("active");
+        }, 200);
+      };
+      const d = {
+        65: "./SFX/CLAP.wav",
+        83: "./SFX/HIHAT.wav",
+        68: "./SFX/KICK.wav",
+        70: "./SFX/OPENHAT.wav",
+        71: "./SFX/BOOM.wav",
+        72: "./SFX/RIDE.wav",
+        74: "./SFX/SNARE.wav",
+        75: "./SFX/TOM.wav",
+        76: "./SFX/COWBELL.wav",
+      };
+      document.addEventListener("keydown", (e) => {
+        c = e.keyCode;
+        new Audio(d[c]).play();
+        document.getElementById(`${c}`).classList.add("active");
+        addClass(`${c}`);
+      });
+      Array.from(document.getElementsByClassName("trigger")).forEach((el) => {
+        el.addEventListener("click", () => {
+          new Audio(d[parseInt(el.id)]).play();
+          el.classList.add("active");
+          addClass(el.id);
+        });
+      });
+    </script>
+  </body>
+</html>
